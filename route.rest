@@ -1,3 +1,0 @@
-
-#Test GET req to recommender
-GET http://localhost:3000/recommend/indianapolis/usa

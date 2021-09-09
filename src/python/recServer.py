@@ -34,7 +34,9 @@ def rec(city, country):
 
     owm = OWM('5660c0b19c206d73cc540654cd1537dc')
     mgr = owm.weather_manager()
-    observation = mgr.weather_at_place('Indianapolis, US')
+    # observation = mgr.weather_at_place('Indianapolis, US')
+    observation = mgr.weather_at_place(city + ', ' + country)
+    print(observation.weather.status)
     w = observation.weather
     status = w.status
 
