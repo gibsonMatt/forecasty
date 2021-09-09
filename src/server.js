@@ -36,6 +36,33 @@ app.get('/api/whereami', async (req, res) => {
   })
 })
 
+// Test route to get song recommendation from IP
+const request = require('request');
+app.get('/api/songbycoords', async (req, res) => {
+  var ip = req.socket.remoteAddress.split(':').pop();
+  geoIP.lookup(ip, async (err, data) => {
+    if (err) throw err;
+    console.log(data);
+
+    lat = data.location.lat;
+    lng = data.location.lng;
+
+    if(lat === 0 && lng === 0) {
+      res.status(400).send('IP not located');
+    } else {
+
+      request('http://' + process.env.PY_HOST + ':' + process.env.PY_PORT + '/flask/bycoords?lat=' + lat + '&lng=' + lng, (error, response, body) => {
+          console.error('error:', error); // Print the error
+          console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+          console.log('body:', body); // Print the data received
+          res.json({Song: body}); //Display the response on the website
+        });
+    }
+  });
+});
+
+
+
 // Start listening on port
 const port = process.env.API_PORT === undefined ? 8081 : process.env.API_PORT;
 app.listen(port, () => console.log('Server started on port ' + port));
