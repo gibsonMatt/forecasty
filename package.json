@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "./.venv/bin/python3 ./src/python/recServer.py & nodemon ./src/server.js"
+    "start": "nodemon ./src/server.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -11,8 +11,11 @@
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "geoip-lite": "^1.4.2",
+    "http": "0.0.1-security",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
+    "mysql": "^2.18.1",
+    "node-fetch": "^3.0.0",
     "pug": "2.0.0-beta11",
     "request": "^2.88.2",
     "simple-geoip": "^0.1.2"
